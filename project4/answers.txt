@@ -1,0 +1,50 @@
+CS 2200 Spring 2021
+Project 4
+
+Name: Neel Ganediwal
+GT Username: 903582662
+
+Problem 1C (FCFS Scheduler)
+----------
+1 CPU Execution Time: 67.9s
+2 CPU Execution Time: 39.9s
+4 CPU Execution Time: 37.0s
+
+There is no linear relationship between the number of CPUs and total execution time. This is because Ahdahl's law (or the law of 
+diminishing returns) limits the linear increase in performance. Every time we double the number of processes, the speedup ratio 
+will diminish, and thereby the total throughput approaches a limit.
+
+
+Problem 2B (Round-Robin)
+----------
+Total Waiting Time for 800ms: 317.1s
+Total Waiting Time for 600ms: 302.3s
+Total Waiting Time for 400ms: 291.7s
+Total Waiting Time for 200ms: 284.4s
+
+The relationship between timeslice length and total waiting time is as we increase our timeslice length, the total waiting time also 
+increases. Therefore, the shorter we make our timeslice, the less we have to wait for the processes to execute. However, this is not 
+always the ideal choice in a real OS because the time that passes while we do context switches are pure overhead (meaning the system 
+does no useful work while switching). Lower time slices have a higher number of context switches, so the time spent performing these 
+context switches is wasted computing time that could've been used to do something productive. 
+
+
+Problem 3B (Preemptive Priority)
+----------
+An “age” policy can be applied which counts the amount of times the process with low priority is starving and then if that “age” counter 
+is above a certain threshold, then we can preempt it and force it to be serviced. This policy ensures that jobs with lower priority will 
+eventually complete their execution and thus reduce starvation of low priority tasks in a priority scheduler. Another way of looking at 
+it is the aging policy gradually increases the priority of a task, based on its waiting time in the ready queue.
+
+
+Problem 4 (The Priority Inversion Problem)
+---------
+We can temporarily assign the priority of the window manager process to the priority of P1 (high priority). As a result, the new 
+incoming medium priority processes will not be able to starve the window manager process as it temporarily possesses the priority of
+P1 (which is higher priority than these medium priority processes). As the window manager is not getting starved, P1 will also not get 
+starved. After the window manager finishes running, the window manager can return the temporary priority back to P1. Then P1 will be 
+executed (higher priority than medium priority processes), meaning the window can get displayed on the monitor which will complete the 
+P1 process. Hence, using priority scheduler, P1 will finish its execution before any of the medium priority processes. 
+
+
+
